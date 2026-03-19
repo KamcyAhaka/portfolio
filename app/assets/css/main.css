@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0c0c0c;
+  --surface: #141414;
+  --border: rgba(255, 255, 255, 0.07);
+  --text: #e8e8e8;
+  --muted: #484848;
+  --subtle: #2a2a2a;
+  --accent: #e8e8e8;
+  --syne: "Syne", sans-serif;
+  --inter: "Inter", sans-serif;
+}
+
+@theme {
+  --font-accent: "Syne", sans-serif;
+  --font-accent-2: "Inter", sans-serif;
+  --color-gray-1: rgba(255, 255, 255, 0.835);
+  --color-gray-2: rgba(216, 216, 216, 0.845);
+}
+
+body {
+  background-color: #000000;
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  font-family: var(--inter);
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
