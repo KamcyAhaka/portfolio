@@ -54,7 +54,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="philosophy-wrapper" style="height: 100vh">
+  <section id="about" class="philosophy-wrapper" style="height: 100vh">
     <div class="philosophy-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4">
       <div class="philosophy-header flex flex-col gap-5">
         <h2 class="philosophy-title">
@@ -123,9 +123,20 @@ onMounted(() => {
 .pillars {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
   &::-webkit-scrollbar {
-    display: none;
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 99px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
   }
 
   position: relative;

@@ -10,6 +10,8 @@
   --accent: #e8e8e8;
   --syne: "Syne", sans-serif;
   --inter: "Inter", sans-serif;
+
+  scroll-behavior: smooth;
 }
 
 @theme {

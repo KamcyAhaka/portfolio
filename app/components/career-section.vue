@@ -73,7 +73,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="career-wrapper" style="height: 200vh">
+  <section id="career" class="career-wrapper" style="height: 200vh">
     <div class="career-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 py-16 pb-6">
       <div class="career-header flex flex-col gap-5">
         <h2 class="career-title">
@@ -148,9 +148,20 @@ onMounted(() => {
 .experiences {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
   &::-webkit-scrollbar {
-    display: none;
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 99px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
   }
 
   position: relative;
