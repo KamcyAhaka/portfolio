@@ -55,7 +55,7 @@ onMounted(() => {
 
 <template>
   <section class="philosophy-wrapper" style="height: 100vh">
-    <div class="philosophy-section sticky top-10 flex flex-col gap-12 pt-16 pb-4">
+    <div class="philosophy-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4">
       <div class="philosophy-header flex flex-col gap-5">
         <h2 class="philosophy-title">
           My Engineering
@@ -68,7 +68,11 @@ onMounted(() => {
         </p>
       </div>
 
-      <div ref="pillarsRef" class="pillars flex h-48 flex-col overflow-scroll" :class="{ 'pillars--lit': glowPulsing }">
+      <div
+        ref="pillarsRef"
+        class="pillars flex min-h-0 flex-1 flex-col overflow-scroll"
+        :class="{ 'pillars--lit': glowPulsing }"
+      >
         <div
           v-for="pillar in pillars"
           :key="pillar.word"

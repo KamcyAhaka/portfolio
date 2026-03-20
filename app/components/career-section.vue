@@ -74,7 +74,7 @@ onMounted(() => {
 
 <template>
   <section class="career-wrapper" style="height: 200vh">
-    <div class="career-section sticky top-10 flex flex-col gap-12 py-16 pb-6">
+    <div class="career-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 py-16 pb-6">
       <div class="career-header flex flex-col gap-5">
         <h2 class="career-title">
           My Career
@@ -89,7 +89,7 @@ onMounted(() => {
 
       <div
         ref="experienceRef"
-        class="experiences flex h-56 flex-col overflow-scroll"
+        class="experiences flex min-h-0 flex-1 flex-col overflow-scroll"
         :class="{ 'experiences--lit': glowPulsing }"
       >
         <div
