@@ -3,7 +3,7 @@ const philosophy = ref(["Understand", "Design", "Experience"]);
 </script>
 
 <template>
-  <section class="relative h-[calc(100vh-10rem)] overflow-hidden pt-[10rem]">
+  <section class="relative h-[60vh] pt-32">
     <div class="flex h-full flex-col justify-center gap-4">
       <div>
         <h1 class="font-accent heading-text text-left text-7xl text-wrap">
