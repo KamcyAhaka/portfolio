@@ -2,20 +2,122 @@
 const startYear = 2022;
 const currentYear = new Date().getFullYear();
 const years = currentYear - startYear;
+
+const activeExperience = ref<string | null>(null);
+const glowPulsing = ref(false);
+const experienceRef = ref<HTMLElement | null>(null);
+const experienceRefs = ref<HTMLElement[]>([]);
+
+const experiences = [
+  {
+    company: "Topibro Technologies",
+    role: "Software Engineer",
+    index: "01",
+    time: "Jan 2025 - Present",
+    activities: [
+      "Delivered 10+ client-facing web apps across 5+ industries, owning frontend from architecture to release",
+      "Integrated 40+ REST and third-party APIs, handling auth, error states, and edge cases",
+      "Improved frontend performance by 30% via bundle optimisation, lazy loading, and render efficiency",
+      "Collaborated with 12+ cross-functional stakeholders — designers, engineers, PMs, and clients — per project",
+      "Refactored legacy codebases, cutting frontend technical debt by 40%",
+      "Led technical planning and delivery for projects spanning 4–16 weeks",
+    ],
+  },
+  {
+    company: "Seamailer",
+    role: "Frontend Developer",
+    index: "02",
+    time: "Aug 2025 - Jan 2025",
+    activities: [
+      "Built a directed graph visualisation UI for the flagship automation feature, shipping 2 weeks ahead of schedule",
+      "Designed a modular component system that cut feature dev time by 35% across 5+ major product areas",
+      "Led frontend tooling and framework decisions, ensuring long-term scalability and maintainability",
+      "Integrated with 30+ backend services and third-party APIs, ensuring reliable data flow and fault tolerance",
+      "Implemented state management for 20+ async workflows with real-time updates and cross-feature data sync",
+      "Built an SEO-optimised landing page with Nuxt.js, Google Analytics integration, and technical SEO best practices",
+      "Contributed to the frontend architecture of a platform serving 50k+ contacts across 100+ customers",
+      "Delivered mobile-first interfaces and an analytics dashboard achieving 95%+ Lighthouse accessibility scores",
+    ],
+  },
+];
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const company = entry.target.getAttribute("data-company");
+          if (company === activeExperience.value) return;
+
+          glowPulsing.value = false;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              activeExperience.value = company;
+              glowPulsing.value = true;
+            });
+          });
+        }
+      });
+    },
+    {
+      root: experienceRef.value,
+      rootMargin: "0px 0px -80% 0px",
+      threshold: 0,
+    },
+  );
+
+  experienceRefs.value.forEach((el) => observer.observe(el));
+
+  onUnmounted(() => observer.disconnect());
+});
 </script>
 
 <template>
-  <section class="career-section sticky top-0 flex flex-col gap-12 py-16">
-    <div class="career-header flex flex-col gap-5">
-      <h2 class="career-title">
-        My Career
-        <span class="career-title--outline">Journey</span>
-      </h2>
-      <p class="career-intro text-sm">
-        I’ve been building software for over {{ years }} years. I’ve seen languages rise and fall, frameworks come and
-        go, and the industry change in ways I never expected. But through it all, one thing has remained constant: my
-        passion for building great software.
-      </p>
+  <section class="career-wrapper" style="height: 200vh">
+    <div class="career-section sticky top-10 flex flex-col gap-12 py-16 pb-6">
+      <div class="career-header flex flex-col gap-5">
+        <h2 class="career-title">
+          My Career
+          <span class="career-title--outline">Journey</span>
+        </h2>
+        <p class="career-intro text-sm">
+          Over {{ years }} years of building across product teams and client projects; from complex automation UIs and
+          component systems to SEO-optimised platforms serving tens of thousands of users. I specialise in frontend
+          engineering with Vue and Nuxt, and I care deeply about shipping software that performs as well as it looks.
+        </p>
+      </div>
+
+      <div
+        ref="experienceRef"
+        class="experiences flex h-56 flex-col overflow-scroll"
+        :class="{ 'experiences--lit': glowPulsing }"
+      >
+        <div
+          v-for="experience in experiences"
+          :key="experience.company"
+          :ref="
+            (el) => {
+              if (el) experienceRefs.push(el as HTMLElement);
+            }
+          "
+          :data-company="experience.company"
+          class="experience relative grid py-7"
+          :class="{ 'experience--active': activeExperience === experience.company }"
+        >
+          <span class="experience-index pt-1 text-xs">{{ experience.index }}</span>
+          <div class="experience-body flex flex-col gap-2">
+            <h3 class="experience-role">{{ experience.role }}</h3>
+            <h4 class="experience-company">{{ experience.company }}</h4>
+            <h4 class="experience-time">{{ experience.time }}</h4>
+            <ul class="experience-activities flex flex-col gap-2.5">
+              <li v-for="activity in experience.activities" :key="activity" class="experience-activity">
+                {{ activity }}
+              </li>
+            </ul>
+          </div>
+          <div class="experience-line" />
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -40,5 +142,175 @@ const years = currentYear - startYear;
   line-height: 1.8;
   color: rgba(216, 216, 216, 0.6);
   max-width: 52ch;
+}
+
+/* ── Scroll snap container ── */
+.experiences {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  position: relative;
+  &::before {
+    content: "";
+    position: sticky;
+    top: 0;
+    display: block;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100px;
+    margin-bottom: -100px;
+    background: radial-gradient(
+      ellipse 75% 160% at 50% -20%,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.07) 45%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &--lit::before {
+    opacity: 1;
+  }
+}
+
+.experience {
+  grid-template-columns: 2rem 1fr;
+  cursor: default;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  &:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.7);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.35s ease;
+  }
+
+  &--active {
+    &::before {
+      transform: scaleY(1);
+    }
+
+    .experience-role {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .experience-index {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .experience-company {
+      color: rgba(216, 216, 216, 0.6);
+    }
+
+    .experience-time {
+      color: rgba(216, 216, 216, 0.7);
+    }
+
+    .experience-activity {
+      color: rgba(216, 216, 216, 0.75);
+    }
+  }
+
+  &:not(.experience--active):hover {
+    &::before {
+      transform: scaleY(0.4);
+    }
+
+    .experience-role {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .experience-index {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .experience-company {
+      color: rgba(216, 216, 216, 0.5);
+    }
+
+    .experience-activity {
+      color: rgba(216, 216, 216, 0.6);
+    }
+  }
+}
+
+.experience-index {
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.25s ease;
+  font-family: var(--font-mono, monospace);
+}
+
+.experience-role {
+  font-family: var(--font-accent, inherit);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.25s ease;
+}
+
+.experience-company {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(216, 216, 216, 0.4);
+  transition: color 0.25s ease;
+}
+
+.experience-time {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(216, 216, 216, 0.3);
+  transition: color 0.25s ease;
+}
+
+.experience-activities {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.experience-activity {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: rgba(216, 216, 216, 0.45);
+  transition: color 0.25s ease;
+  padding-left: 1rem;
+  position: relative;
+
+  &::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.experience-line {
+  display: none;
 }
 </style>

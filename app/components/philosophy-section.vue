@@ -54,8 +54,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="philosophy-wrapper" style="height: 150vh">
-    <section class="philosophy-section sticky top-10 flex flex-col gap-12 py-16">
+  <section class="philosophy-wrapper" style="height: 100vh">
+    <div class="philosophy-section sticky top-10 flex flex-col gap-12 pt-16 pb-4">
       <div class="philosophy-header flex flex-col gap-5">
         <h2 class="philosophy-title">
           My Engineering
@@ -78,7 +78,7 @@ onMounted(() => {
             }
           "
           :data-word="pillar.word"
-          class="pillar relative grid gap-4 py-7"
+          class="pillar relative grid gap-2 py-7"
           :class="{ 'pillar--active': activePillar === pillar.word }"
         >
           <span class="pillar-index pt-1 text-xs">{{ pillar.index }}</span>
@@ -89,8 +89,8 @@ onMounted(() => {
           <div class="pillar-line" />
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -232,7 +232,7 @@ onMounted(() => {
 }
 
 .pillar-text {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   line-height: 1.8;
   color: rgba(216, 216, 216, 0.45);
   transition: color 0.25s ease;
