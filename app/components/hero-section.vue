@@ -11,7 +11,7 @@ const philosophy = ref(["Understand", "Design", "Experience"]);
         </h1>
       </div>
       <div>
-        <p class="font-accent-2 heading-info text-left text-xs">
+        <p class="font-accent-2 heading-info text-left text-sm">
           I'm Divine "KamCy" Ahaka, a software engineer with a passion for creating applications that are
           <span class="">beautiful to look at</span>, <span class="">intuitive to use</span> and
           <span class="">gets the job done</span>.
