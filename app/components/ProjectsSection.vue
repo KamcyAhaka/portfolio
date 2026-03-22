@@ -7,6 +7,7 @@ import type { Project } from "~/types/project";
 const activeProject = ref<Project | null>(null);
 const sectionRef = ref<HTMLElement | null>(null);
 const glowPulsing = ref(false);
+const hasDragged = ref(false);
 
 const projects: Project[] = [
   {
@@ -144,18 +145,35 @@ onMounted(() => {
 
       <!-- Swiper carousel -->
       <ClientOnly>
-        <Swiper
-          :modules="[FreeMode]"
-          :free-mode="true"
-          :grab-cursor="true"
-          slides-per-view="auto"
-          :space-between="20"
-          class="projects-swiper min-h-0 w-full flex-1"
-        >
-          <SwiperSlide v-for="project in projects" :key="project.index" class="projects-slide">
-            <ProjectCard :project="project" @open-modal="openModal(project)" />
-          </SwiperSlide>
-        </Swiper>
+        <div class="relative flex min-h-0 flex-1 flex-col">
+          <Swiper
+            :modules="[FreeMode]"
+            :free-mode="true"
+            :grab-cursor="true"
+            slides-per-view="auto"
+            :space-between="20"
+            class="projects-swiper min-h-0 w-full flex-1"
+            @slider-move="hasDragged = true"
+          >
+            <SwiperSlide v-for="project in projects" :key="project.index" class="projects-slide">
+              <ProjectCard :project="project" @open-modal="openModal(project)" />
+            </SwiperSlide>
+          </Swiper>
+
+          <!-- Right fade edge -->
+          <div
+            class="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-24 bg-gradient-to-r from-transparent to-[#0e0e0eb0]"
+          />
+
+          <!-- Drag hint — fades out after first interaction -->
+          <div
+            class="drag-hint mt-3 flex items-center gap-1.5 transition-opacity duration-500"
+            :class="{ 'opacity-0': hasDragged }"
+          >
+            <Icon name="octicon:arrow-right-16" class="text-xs text-white/30" />
+            <span class="text-[0.68rem] tracking-[0.06em] text-white/50">drag to explore</span>
+          </div>
+        </div>
       </ClientOnly>
     </div>
 
