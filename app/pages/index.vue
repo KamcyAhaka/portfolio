@@ -4,5 +4,6 @@
     <HeroSection />
     <PhilosophySection />
     <CareerSection />
+    <ProjectsSection />
   </main>
 </template>
