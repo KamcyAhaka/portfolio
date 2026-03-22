@@ -12,12 +12,14 @@
   },
   "dependencies": {
     "@nuxt/a11y": "1.0.0-alpha.1",
+    "@nuxt/content": "^3.12.0",
     "@nuxt/eslint": "1.15.2",
     "@nuxt/fonts": "0.14.0",
     "@nuxt/hints": "1.0.0-alpha.9",
     "@nuxt/icon": "2.2.1",
     "@nuxtjs/seo": "3.4.0",
     "@tailwindcss/vite": "^4.2.1",
+    "better-sqlite3": "^12.8.0",
     "nuxt": "^4.3.1",
     "swiper": "^12.1.2",
     "tailwindcss": "^4.2.1",
@@ -27,6 +29,7 @@
   "devDependencies": {
     "@iconify-json/octicon": "^1.2.22",
     "@typescript-eslint/parser": "^8.57.1",
+    "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.4.0",
     "husky": "^9.1.7",
@@ -39,6 +42,12 @@
   "lint-staged": {
     "*.{js,ts,vue}": [
       "pnpm exec eslint --fix"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "sqlite3"
     ]
   }
 }
