@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { FreeMode } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+
 import "swiper/css";
 import type { Project } from "~/types/project";
 
@@ -100,6 +101,20 @@ function openModal(project: Project) {
   activeProject.value = project;
 }
 
+const swiperInstance = ref<SwiperType | null>(null);
+
+function onSwiper(swiper: SwiperType) {
+  swiperInstance.value = swiper;
+}
+
+function onSwipeLeft() {
+  swiperInstance.value?.slideNext(300);
+}
+
+function onSwipeRight() {
+  swiperInstance.value?.slidePrev(300);
+}
+
 onMounted(() => {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -147,16 +162,22 @@ onMounted(() => {
       <ClientOnly>
         <div class="relative flex min-h-0 flex-1 flex-col">
           <Swiper
-            :modules="[FreeMode]"
-            :free-mode="true"
-            :grab-cursor="true"
             slides-per-view="auto"
             :space-between="20"
+            :grab-cursor="true"
+            :centered-slides="true"
+            :round-lengths="true"
             class="projects-swiper min-h-0 w-full flex-1"
+            @swiper="onSwiper"
             @slider-move="hasDragged = true"
           >
             <SwiperSlide v-for="project in projects" :key="project.index" class="projects-slide">
-              <ProjectCard :project="project" @open-modal="openModal(project)" />
+              <ProjectCard
+                :project="project"
+                @open-modal="openModal(project)"
+                @swipe-left="onSwipeLeft"
+                @swipe-right="onSwipeRight"
+              />
             </SwiperSlide>
           </Swiper>
 
@@ -166,12 +187,9 @@ onMounted(() => {
           />
 
           <!-- Drag hint — fades out after first interaction -->
-          <div
-            class="drag-hint mt-3 flex items-center gap-1.5 transition-opacity duration-500"
-            :class="{ 'opacity-0': hasDragged }"
-          >
+          <div class="mt-3 flex items-center gap-1.5">
             <Icon name="octicon:arrow-right-16" class="text-xs text-white/30" />
-            <span class="text-[0.68rem] tracking-[0.06em] text-white/50">drag to explore</span>
+            <span class="text-[0.68rem] tracking-[0.06em] text-white/50"> drag the top bar to explore </span>
           </div>
         </div>
       </ClientOnly>

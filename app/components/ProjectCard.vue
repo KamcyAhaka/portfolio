@@ -2,11 +2,20 @@
 import type { Project } from "~/types/project";
 
 const props = defineProps<{ project: Project }>();
-const emit = defineEmits<{ "open-modal": [] }>();
+const emit = defineEmits<{
+  "open-modal": [];
+  "swipe-left": [];
+  "swipe-right": [];
+}>();
 
 const iframeRef = ref<HTMLIFrameElement | null>(null);
 const iframeLoaded = ref(false);
 const iframeFailed = ref(false);
+
+const { overlayActive, onPointerDown, onPointerMove, onPointerUp, onPointerCancel } = useIframeDrag(
+  () => emit("swipe-left"),
+  () => emit("swipe-right"),
+);
 
 const displayUrl = computed(() => {
   try {
@@ -30,7 +39,9 @@ function onError() {
     class="flex h-full w-[350px] flex-col overflow-hidden rounded-xl border border-white/[0.08] bg-[#0e0e0e] transition-colors duration-200 ease-in-out hover:border-white/[0.18]"
   >
     <!-- Browser-chrome top bar -->
-    <div class="flex shrink-0 items-center gap-2.5 border-b border-white/[0.07] bg-[#141414] px-3.5 py-2.5">
+    <div
+      class="flex shrink-0 cursor-grab items-center gap-2.5 border-b border-white/[0.07] bg-[#141414] px-3.5 py-2.5 transition-colors duration-200 hover:bg-white/[0.06] active:cursor-grabbing"
+    >
       <span class="shrink-0 font-mono text-[0.7rem] tracking-[0.08em] text-white/30">
         {{ project.index }}
       </span>
@@ -93,6 +104,16 @@ function onError() {
         @load="onLoad"
         @error="onError"
       />
+
+      <div
+        v-if="iframeLoaded && !iframeFailed"
+        class="absolute inset-0 z-10 touch-none"
+        :style="{ pointerEvents: overlayActive ? 'auto' : 'none' }"
+        @pointerdown="onPointerDown"
+        @pointermove="onPointerMove"
+        @pointerup="onPointerUp"
+        @pointercancel="onPointerCancel"
+      />
     </div>
   </div>
 </template>
@@ -103,9 +124,11 @@ function onError() {
   top: 0;
   left: 0;
   width: 1280px;
-  height: 305%;
+  /* The height is calculated as height = (1280 / cardWidth) * 100 + '%' */
+  height: 366%;
   border: none;
-  transform: scale(0.328);
+  /* The scale factor is calculated as scale = cardWidth / 1280 */
+  transform: scale(0.2734);
   transform-origin: top left;
   pointer-events: all;
 }
