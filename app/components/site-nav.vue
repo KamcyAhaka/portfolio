@@ -15,6 +15,9 @@
           <NuxtLink to="#projects" class="site-nav-link"> Projects </NuxtLink>
         </li>
         <li class="site-nav-item">
+          <NuxtLink to="/devlogs" class="site-nav-link"> Devlogs </NuxtLink>
+        </li>
+        <li class="site-nav-item">
           <NuxtLink to="#contact" class="site-nav-link"> Contact </NuxtLink>
         </li>
       </menu>
