@@ -28,12 +28,9 @@ const contactMethods = [
 </script>
 
 <template>
-  <section id="contact" class="flex flex-col gap-12 pt-16 pb-32">
+  <section id="contact" class="flex flex-col gap-12 pt-16 pb-16">
     <div class="contact-header flex flex-col gap-5">
-      <h2 class="contact-title">
-        Let's
-        <span class="contact-title--outline">Connect</span>
-      </h2>
+      <h2 class="contact-title"><span class="contact-title--outline">Let's</span> Connect</h2>
       <p class="contact-intro text-sm">
         Whether you have a question, a project in mind, or just want to connect, feel free to reach out. I'll do my best
         to get back to you!

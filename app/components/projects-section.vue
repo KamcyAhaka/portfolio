@@ -13,6 +13,27 @@ const hasDragged = ref(false);
 const projects: Project[] = [
   {
     index: "01",
+    title: "Pay Attention To Him",
+    tagline: "Ministry website with media and event management",
+    tags: ["Nuxt", "Vue", "Prisma", "PostgreSQL"],
+    url: "https://payattentiontohim.org/",
+    details:
+      "A full-featured ministry website built to host sermons, events, and devotional content for a growing faith community. The platform supports dynamic content management, media streaming references, and an accessible design that works for users of all technical backgrounds.",
+    stack: [
+      { name: "Nuxt 3", role: "SSR framework & routing" },
+      { name: "Vue 3", role: "UI composition & reactivity" },
+      { name: "Prisma ORM", role: "Database access layer" },
+      { name: "PostgreSQL", role: "Primary database" },
+    ],
+    highlights: [
+      "Dynamic sermon and event management with a custom CMS interface",
+      "Accessible design meeting WCAG 2.1 AA standards",
+      "SEO-optimised pages with Open Graph metadata for social sharing",
+      "Optimised for low-bandwidth environments serving a global audience",
+    ],
+  },
+  {
+    index: "02",
     title: "Ugochukwu Osuagwu",
     tagline: "Personal portfolio for a communications professional",
     tags: ["Nuxt", "Vue", "TypeScript", "SCSS"],
@@ -33,7 +54,7 @@ const projects: Project[] = [
     ],
   },
   {
-    index: "02",
+    index: "03",
     title: "Judith Amarachi",
     tagline: "Personal brand site for a creative professional",
     tags: ["Nuxt", "Vue", "Tailwind", "GSAP"],
@@ -53,27 +74,7 @@ const projects: Project[] = [
       "Integrated contact form with server-side email handling",
     ],
   },
-  {
-    index: "03",
-    title: "Pay Attention To Him",
-    tagline: "Ministry website with media and event management",
-    tags: ["Nuxt", "Vue", "Prisma", "PostgreSQL"],
-    url: "https://payattentiontohim.org/",
-    details:
-      "A full-featured ministry website built to host sermons, events, and devotional content for a growing faith community. The platform supports dynamic content management, media streaming references, and an accessible design that works for users of all technical backgrounds.",
-    stack: [
-      { name: "Nuxt 3", role: "SSR framework & routing" },
-      { name: "Vue 3", role: "UI composition & reactivity" },
-      { name: "Prisma ORM", role: "Database access layer" },
-      { name: "PostgreSQL", role: "Primary database" },
-    ],
-    highlights: [
-      "Dynamic sermon and event management with a custom CMS interface",
-      "Accessible design meeting WCAG 2.1 AA standards",
-      "SEO-optimised pages with Open Graph metadata for social sharing",
-      "Optimised for low-bandwidth environments serving a global audience",
-    ],
-  },
+
   {
     index: "04",
     title: "Judith Amarachi Blog",
@@ -148,10 +149,7 @@ onMounted(() => {
     >
       <!-- Header -->
       <div class="projects-header flex flex-col gap-5">
-        <h2 class="projects-title">
-          Featured
-          <span class="projects-title--outline">Projects</span>
-        </h2>
+        <h2 class="projects-title"><span class="projects-title--outline">Featured</span> Projects</h2>
         <p class="projects-intro text-sm">
           A selection of client projects I've designed and engineered end-to-end — from architecture decisions and
           component systems to final deployment. Each embedded below so you can explore them right here.

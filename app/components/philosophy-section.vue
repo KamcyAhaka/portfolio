@@ -57,10 +57,7 @@ onMounted(() => {
   <section id="about" class="philosophy-wrapper" style="height: 100vh">
     <div class="philosophy-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4">
       <div class="philosophy-header flex flex-col gap-5">
-        <h2 class="philosophy-title">
-          My Engineering
-          <span class="philosophy-title--outline">Philosophy</span>
-        </h2>
+        <h2 class="philosophy-title"><span class="philosophy-title--outline">My</span> Engineering Philosophy</h2>
         <p class="philosophy-intro text-sm">
           I believe that software should be more than just functional; it should be a joy to use. Every line of code,
           every design decision, every interaction should be intentional and contribute to a seamless and delightful

@@ -76,10 +76,7 @@ onMounted(() => {
   <section id="career" class="career-wrapper" style="height: 100vh">
     <div class="career-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 py-16 pb-6">
       <div class="career-header flex flex-col gap-5">
-        <h2 class="career-title">
-          My Career
-          <span class="career-title--outline">Journey</span>
-        </h2>
+        <h2 class="career-title"><span class="career-title--outline">My</span> Career Journey</h2>
         <p class="career-intro text-sm">
           Over {{ years }} years of building across product teams and client projects; from complex automation UIs and
           component systems to SEO-optimised platforms serving tens of thousands of users. I specialise in frontend
