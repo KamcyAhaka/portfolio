@@ -54,9 +54,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="about" class="philosophy-wrapper h-screen lg:max-h-[1000px]">
+  <section id="about" class="philosophy-wrapper desktop:h-auto desktop:py-10 h-screen lg:max-h-[1000px]">
     <div
-      class="philosophy-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4 lg:h-auto lg:gap-20 lg:pt-0 xl:flex-row"
+      class="philosophy-section desktop:static desktop:h-auto sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4 lg:h-auto lg:gap-20 lg:pt-0 xl:flex-row"
     >
       <div class="philosophy-header flex flex-col gap-5 lg:justify-center xl:w-1/2">
         <h2

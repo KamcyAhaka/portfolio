@@ -4,7 +4,7 @@ const philosophy = ref(["Understand", "Design", "Experience"]);
 
 <template>
   <section
-    class="desktop:min-h-[60vh] desktop:pb-24 relative min-h-[60vh] pt-32 pb-12 md:min-h-[50vh] md:pt-40 lg:pt-48"
+    class="desktop:min-h-[70vh] desktop:pb-24 relative min-h-[60vh] pt-32 pb-12 md:min-h-[50vh] md:pt-40 lg:pt-48"
   >
     <div class="flex h-full flex-col justify-center gap-4 md:gap-6 lg:max-w-[800px] lg:gap-8">
       <div>
