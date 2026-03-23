@@ -7,4 +7,5 @@
     <ProjectsSection />
     <ContactSection />
   </main>
+  <SiteFooter />
 </template>

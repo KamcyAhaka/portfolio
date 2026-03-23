@@ -6,19 +6,19 @@
       <NuxtLink to="/" class="site-logo text-lg font-bold md:tracking-wide"> KamCy </NuxtLink>
       <menu class="site-nav-list text-gray-2 flex items-center gap-3 text-sm md:gap-8 md:text-base">
         <li class="site-nav-item">
-          <NuxtLink to="#about" class="site-nav-link"> About </NuxtLink>
+          <NuxtLink to="/#about" class="site-nav-link"> About </NuxtLink>
         </li>
         <li class="site-nav-item">
-          <NuxtLink to="#career" class="site-nav-link"> Career </NuxtLink>
+          <NuxtLink to="/#career" class="site-nav-link"> Career </NuxtLink>
         </li>
         <li class="site-nav-item">
-          <NuxtLink to="#projects" class="site-nav-link"> Projects </NuxtLink>
+          <NuxtLink to="/#projects" class="site-nav-link"> Projects </NuxtLink>
         </li>
         <li class="site-nav-item">
           <NuxtLink to="/devlogs" class="site-nav-link"> Devlogs </NuxtLink>
         </li>
         <li class="site-nav-item">
-          <NuxtLink to="#contact" class="site-nav-link"> Contact </NuxtLink>
+          <NuxtLink to="/#contact" class="site-nav-link"> Contact </NuxtLink>
         </li>
       </menu>
     </nav>
