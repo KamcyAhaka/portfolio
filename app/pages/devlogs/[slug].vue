@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const route = useRoute();
-const { data: page } = await useAsyncData(route.path, () => queryCollection("devlogs").path(route.path).first());
+const normalizedPath = route.path.replace(/\/$/, "");
+const { data: page } = await useAsyncData(normalizedPath, () =>
+  queryCollection("devlogs").path(normalizedPath).first(),
+);
 
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: "Devlog not found", fatal: true });
