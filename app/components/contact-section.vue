@@ -28,16 +28,22 @@ const contactMethods = [
 </script>
 
 <template>
-  <section id="contact" class="flex flex-col gap-12 pt-16 pb-16">
-    <div class="contact-header flex flex-col gap-5">
-      <h2 class="contact-title"><span class="contact-title--outline">Let's</span> Connect</h2>
-      <p class="contact-intro text-sm">
+  <section id="contact" class="flex flex-col items-start gap-12 pt-16 pb-16 md:pb-32 lg:gap-20 lg:pt-32 xl:flex-row">
+    <div class="contact-header flex flex-col gap-5 lg:sticky lg:top-32 lg:w-1/2">
+      <h2
+        class="font-accent text-3xl leading-[1.1] font-extrabold tracking-[0.12rem] capitalize md:text-5xl lg:text-[4rem]"
+      >
+        <span class="block text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.6)]">Let's</span> Connect
+      </h2>
+      <p
+        class="contact-intro max-w-[52ch] text-sm leading-[1.8] text-[rgba(216,216,216,0.6)] md:text-base lg:max-w-none lg:text-lg"
+      >
         Whether you have a question, a project in mind, or just want to connect, feel free to reach out. I'll do my best
         to get back to you!
       </p>
     </div>
 
-    <div class="contact-grid grid grid-cols-2 gap-6 md:grid-cols-3">
+    <div class="contact-grid grid w-full grid-cols-2 gap-4 md:gap-6 xl:w-1/2">
       <a
         v-for="method in contactMethods"
         :key="method.title"
@@ -47,13 +53,13 @@ const contactMethods = [
         class="contact-card group flex flex-col gap-5 rounded-2xl border border-white/5 bg-white/[0.02] p-3 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.05]"
       >
         <div
-          class="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 text-2xl text-white/50 transition-colors duration-300 group-hover:bg-white/10 group-hover:text-white"
+          class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-xl text-white/50 transition-colors duration-300 group-hover:bg-white/10 group-hover:text-white md:h-12 md:w-12 md:text-2xl"
         >
           <Icon :name="method.icon" />
         </div>
         <div class="flex flex-col gap-1">
-          <h3 class="font-accent text-base font-semibold text-white/90">{{ method.title }}</h3>
-          <p class="text-xs text-[#afaeae] transition-colors duration-300 group-hover:text-white/80">
+          <h3 class="font-accent text-sm font-semibold text-white/90 md:text-base">{{ method.title }}</h3>
+          <p class="text-xs text-[#afaeae] transition-colors duration-300 group-hover:text-white/80 md:text-sm">
             {{ method.value }}
           </p>
         </div>
@@ -81,6 +87,5 @@ const contactMethods = [
 .contact-intro {
   line-height: 1.8;
   color: rgba(216, 216, 216, 0.6);
-  max-width: 52ch;
 }
 </style>

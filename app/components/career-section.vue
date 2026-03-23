@@ -73,11 +73,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="career" class="career-wrapper" style="height: 100vh">
-    <div class="career-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 py-16 pb-6">
-      <div class="career-header flex flex-col gap-5">
-        <h2 class="career-title"><span class="career-title--outline">My</span> Career Journey</h2>
-        <p class="career-intro text-sm">
+  <section id="career" class="career-wrapper h-screen">
+    <div
+      class="career-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 py-16 pb-6 lg:h-auto lg:gap-20 lg:pt-24 xl:flex-row"
+    >
+      <div class="career-header flex flex-col gap-5 lg:justify-center xl:w-1/2">
+        <h2
+          class="font-accent text-3xl leading-[1.1] font-extrabold tracking-[0.12rem] capitalize md:text-5xl lg:text-[4rem]"
+        >
+          <span class="block text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.6)]">My</span> Career Journey
+        </h2>
+        <p class="career-intro max-w-[52ch] text-sm leading-[1.8] text-[rgba(216,216,216,0.6)] md:text-base lg:text-lg">
           Over {{ years }} years of building across product teams and client projects; from complex automation UIs and
           component systems to SEO-optimised platforms serving tens of thousands of users. I specialise in frontend
           engineering with Vue and Nuxt, and I care deeply about shipping software that performs as well as it looks.
@@ -86,7 +92,7 @@ onMounted(() => {
 
       <div
         ref="experienceRef"
-        class="experiences flex min-h-0 flex-1 flex-col overflow-scroll"
+        class="experiences flex min-h-0 flex-1 flex-col overflow-scroll lg:max-h-[500px] lg:pt-[10vh] lg:pl-10 xl:w-1/2"
         :class="{ 'experiences--lit': glowPulsing }"
       >
         <div
@@ -98,16 +104,20 @@ onMounted(() => {
             }
           "
           :data-company="experience.company"
-          class="experience relative grid py-7"
+          class="experience relative grid gap-4 py-8 md:py-12"
           :class="{ 'experience--active': activeExperience === experience.company }"
         >
-          <span class="experience-index pt-1 text-xs">{{ experience.index }}</span>
-          <div class="experience-body flex flex-col gap-2">
-            <h3 class="experience-role">{{ experience.role }}</h3>
-            <h4 class="experience-company">{{ experience.company }}</h4>
-            <h4 class="experience-time">{{ experience.time }}</h4>
-            <ul class="experience-activities flex flex-col gap-2.5">
-              <li v-for="activity in experience.activities" :key="activity" class="experience-activity">
+          <span class="experience-index pt-1 text-xs md:text-sm">{{ experience.index }}</span>
+          <div class="experience-body flex flex-col gap-3">
+            <h3 class="experience-role text-xl md:text-2xl">{{ experience.role }}</h3>
+            <h4 class="experience-company text-xs md:text-sm">{{ experience.company }}</h4>
+            <h4 class="experience-time text-xs md:text-sm">{{ experience.time }}</h4>
+            <ul class="experience-activities mt-2 flex flex-col gap-3">
+              <li
+                v-for="activity in experience.activities"
+                :key="activity"
+                class="experience-activity text-sm md:text-base"
+              >
                 {{ activity }}
               </li>
             </ul>
@@ -120,27 +130,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.career-title {
-  font-family: var(--font-accent, inherit);
-  font-size: clamp(1.75rem, 6vw, 2.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0.12rem;
-  text-transform: capitalize;
-
-  &--outline {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-  }
-}
-
-.career-intro {
-  line-height: 1.8;
-  color: rgba(216, 216, 216, 0.6);
-  max-width: 52ch;
-}
-
 /* ── Scroll snap container ── */
 .experiences {
   scroll-snap-type: y mandatory;

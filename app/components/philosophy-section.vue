@@ -54,11 +54,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="about" class="philosophy-wrapper" style="height: 100vh">
-    <div class="philosophy-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4">
-      <div class="philosophy-header flex flex-col gap-5">
-        <h2 class="philosophy-title"><span class="philosophy-title--outline">My</span> Engineering Philosophy</h2>
-        <p class="philosophy-intro text-sm">
+  <section id="about" class="philosophy-wrapper h-screen lg:max-h-[1000px]">
+    <div
+      class="philosophy-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-12 pt-16 pb-4 lg:h-auto lg:gap-20 lg:pt-0 xl:flex-row"
+    >
+      <div class="philosophy-header flex flex-col gap-5 lg:justify-center xl:w-1/2">
+        <h2
+          class="font-accent text-3xl leading-[1.1] font-extrabold tracking-[0.12rem] capitalize md:text-5xl lg:text-[4rem]"
+        >
+          <span class="block text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.6)]">My</span> Engineering
+          Philosophy
+        </h2>
+        <p
+          class="philosophy-intro max-w-[52ch] text-sm leading-[1.8] text-[rgba(216,216,216,0.6)] md:text-base lg:text-lg"
+        >
           I believe that software should be more than just functional; it should be a joy to use. Every line of code,
           every design decision, every interaction should be intentional and contribute to a seamless and delightful
           user experience.
@@ -67,7 +76,7 @@ onMounted(() => {
 
       <div
         ref="pillarsRef"
-        class="pillars flex min-h-0 flex-1 flex-col overflow-scroll"
+        class="pillars flex min-h-0 flex-1 flex-col overflow-scroll lg:pl-10 xl:w-1/2 xl:pt-[10vh]"
         :class="{ 'pillars--lit': glowPulsing }"
       >
         <div
@@ -79,13 +88,13 @@ onMounted(() => {
             }
           "
           :data-word="pillar.word"
-          class="pillar relative grid gap-2 py-7"
+          class="pillar relative grid gap-4 py-8 md:py-12"
           :class="{ 'pillar--active': activePillar === pillar.word }"
         >
-          <span class="pillar-index pt-1 text-xs">{{ pillar.index }}</span>
-          <div class="pillar-body flex flex-col gap-2">
-            <h3 class="pillar-word">{{ pillar.word }}</h3>
-            <p class="pillar-text">{{ pillar.body }}</p>
+          <span class="pillar-index pt-1 text-xs md:text-sm">{{ pillar.index }}</span>
+          <div class="pillar-body flex flex-col gap-3">
+            <h3 class="pillar-word text-xl md:text-2xl">{{ pillar.word }}</h3>
+            <p class="pillar-text text-sm md:text-base">{{ pillar.body }}</p>
           </div>
           <div class="pillar-line" />
         </div>
@@ -95,33 +104,13 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.philosophy-title {
-  font-family: var(--font-accent, inherit);
-  font-size: clamp(1.75rem, 6vw, 2.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0.12rem;
-  text-transform: capitalize;
-
-  &--outline {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-  }
-}
-
-.philosophy-intro {
-  line-height: 1.8;
-  color: rgba(216, 216, 216, 0.6);
-  max-width: 52ch;
-}
-
 /* ── Scroll snap container ── */
 .pillars {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  max-height: 570px;
   &::-webkit-scrollbar {
     width: 6px;
   }

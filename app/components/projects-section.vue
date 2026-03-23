@@ -144,21 +144,28 @@ onMounted(() => {
   <section id="projects" class="projects-wrapper" style="height: 100vh; overflow-x: clip">
     <div
       ref="sectionRef"
-      class="projects-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-10 py-16 pb-6"
+      class="projects-section sticky top-10 flex h-[calc(100vh-2.5rem)] flex-col gap-10 py-16 pb-6 lg:gap-16 lg:pt-24 xl:flex-row"
       :class="{ 'projects-section--lit': glowPulsing }"
     >
       <!-- Header -->
-      <div class="projects-header flex flex-col gap-5">
-        <h2 class="projects-title"><span class="projects-title--outline">Featured</span> Projects</h2>
-        <p class="projects-intro text-sm">
+      <div class="projects-header flex flex-col gap-5 lg:justify-center xl:w-1/3">
+        <h2
+          class="font-accent text-3xl leading-[1.1] font-extrabold tracking-[0.12rem] capitalize md:text-5xl lg:text-[4rem]"
+        >
+          <span class="block text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.6)]">Featured</span> Projects
+        </h2>
+        <p
+          class="projects-intro max-w-[55ch] text-sm leading-[1.8] text-[rgba(216,216,216,0.6)] md:text-base lg:text-lg"
+        >
           A selection of client projects I've designed and engineered end-to-end — from architecture decisions and
-          component systems to final deployment. Each embedded below so you can explore them right here.
+          component systems to final deployment. Each embedded <span class="desktop:hidden"> below </span>
+          <span class="desktop:inline hidden">to the side</span> so you can explore them right here.
         </p>
       </div>
 
       <!-- Swiper carousel -->
       <ClientOnly>
-        <div class="relative flex min-h-0 flex-1 flex-col">
+        <div class="relative flex min-h-0 flex-1 flex-col lg:justify-center xl:w-2/3">
           <Swiper
             slides-per-view="auto"
             :space-between="20"
@@ -201,27 +208,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.projects-title {
-  font-family: var(--font-accent, inherit);
-  font-size: clamp(1.75rem, 6vw, 2.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0.12rem;
-  text-transform: capitalize;
-
-  &--outline {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-  }
-}
-
-.projects-intro {
-  line-height: 1.8;
-  color: rgba(216, 216, 216, 0.6);
-  max-width: 55ch;
-}
-
 /* ── Glow effect ── */
 .projects-section {
   position: relative;
