@@ -5,5 +5,6 @@
     <PhilosophySection />
     <CareerSection />
     <ProjectsSection />
+    <ContactSection />
   </main>
 </template>
