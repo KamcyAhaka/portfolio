@@ -1,10 +1,11 @@
 ---
 title: "The Importance of Error Tracking: Lessons from the PATH Project"
-description: "How detailed error tracking helped us secure the PATH Project's website against botnet attacks."
 date: 2026-03-23
+description: How detailed error tracking helped us secure the PATH Project's website against botnet attacks.
+published: true
 ---
 
-Being the Engineering Team Lead at <a href="https://payattentiontohim.org/" target="_blank">The Pay Attention To Him (PATH) Project</a> and overseeing the development and launch of our website has been a great learning experience. From building on a low budget (sometimes no budget) to incident recovery, from communication to on-time delivery. But most importantly, I have learnt the importance of detailed error tracking and logging.
+Being the Engineering Team Lead at [The Pay Attention To Him (PATH) Project](https://payattentiontohim.org/) and overseeing the development and launch of our website has been a great learning experience. From building on a low budget (sometimes no budget) to incident recovery, from communication to on-time delivery. But most importantly, I have learnt the importance of detailed error tracking and logging.
 
 Over the last week, PATH's website has been the victim of attacks from bot farms whose IP addresses trace back to India, Russia, and other countries.
 
@@ -24,7 +25,7 @@ Here's what I learned:
 
 ⚡ Observability on a budget is possible. We built our entire error tracking pipeline using PostHog (free tier), Slack webhooks, and a few hundred lines of TypeScript on our Nuxt.js stack. No expensive APM tools required.
 
-🛡️ Every website is a target. If it's public, it will be probed. But your response should be intentional. We didn't panic. We read the logs, understood the pattern, and made informed decisions.
+🛡 Every website is a target. If it's public, it will be probed. But your response should be intentional. We didn't panic. We read the logs, understood the pattern, and made informed decisions.
 
 The PATH Project champions the growth, mental health, and well-being of the boy child, shining a light on the battles boys fight that the world too often ignores. Building and protecting that platform is a responsibility I don't take lightly.
 
