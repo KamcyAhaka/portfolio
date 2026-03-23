@@ -4,7 +4,7 @@ description: "How detailed error tracking helped us secure the PATH Project's we
 date: 2026-03-23
 ---
 
-Being the Engineering Team Lead at The Pay Attention To Him (PATH) Project and overseeing the development and launch of our website has been a great learning experience. From building on a low budget (sometimes no budget) to incident recovery, from communication to on-time delivery. But most importantly, I have learnt the importance of detailed error tracking and logging.
+Being the Engineering Team Lead at <a href="https://payattentiontohim.org/" target="_blank">The Pay Attention To Him (PATH) Project</a> and overseeing the development and launch of our website has been a great learning experience. From building on a low budget (sometimes no budget) to incident recovery, from communication to on-time delivery. But most importantly, I have learnt the importance of detailed error tracking and logging.
 
 Over the last week, PATH's website has been the victim of attacks from bot farms whose IP addresses trace back to India, Russia, and other countries.
 
