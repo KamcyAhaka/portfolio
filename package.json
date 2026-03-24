@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@iconify-json/octicon": "^1.2.22",
+    "@iconify-json/simple-icons": "^1.2.75",
     "@typescript-eslint/parser": "^8.57.1",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
