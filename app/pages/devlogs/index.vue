@@ -42,5 +42,4 @@ useSeoMeta({
       </div>
     </div>
   </main>
-  <ContactSection />
 </template>

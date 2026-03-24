@@ -1,20 +1,10 @@
 <template>
+  <CustomCursor />
   <NuxtPage />
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { useMouse } from "~/composables/useMouse";
 
-const updateMousePosition = (e: MouseEvent) => {
-  document.body.style.setProperty("--mouse-x", `${e.clientX}px`);
-  document.body.style.setProperty("--mouse-y", `${e.clientY}px`);
-};
-
-onMounted(() => {
-  window.addEventListener("mousemove", updateMousePosition);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("mousemove", updateMousePosition);
-});
+useMouse();
 </script>

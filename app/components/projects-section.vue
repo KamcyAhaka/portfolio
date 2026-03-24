@@ -165,7 +165,7 @@ onMounted(() => {
 
       <!-- Swiper carousel -->
       <ClientOnly>
-        <div class="relative flex min-h-0 flex-1 flex-col overflow-x-clip pl-20 lg:justify-center xl:w-2/3">
+        <div class="desktop:pl-20 relative flex min-h-0 flex-1 flex-col overflow-x-clip lg:justify-center xl:w-2/3">
           <Swiper
             slides-per-view="auto"
             :space-between="20"
