@@ -19,7 +19,9 @@ export default defineNuxtConfig({
     "/devlogs/**": { prerender: true },
     "/devlogs": { prerender: true },
   },
+
   compatibilityDate: "2025-07-15",
+
   vite: {
     plugins: [tailwindcss() as any],
   },
@@ -42,5 +44,14 @@ export default defineNuxtConfig({
         styles: ["normal", "italic"],
       },
     ],
+  },
+
+  studio: {
+    repository: {
+      provider: "github",
+      owner: "KamcyAhaka",
+      repo: "portfolio",
+      branch: "main",
+    },
   },
 });

@@ -57,9 +57,13 @@ body::after {
 }
 
 @media (pointer: fine) {
-  *,
-  *::before,
-  *::after {
+  html:not(:has(nuxt-studio:hover)) *,
+  html:not(:has(nuxt-studio:hover)) *::before,
+  html:not(:has(nuxt-studio:hover)) *::after {
     cursor: none !important;
+  }
+
+  html:has(nuxt-studio:hover) .custom-cursor {
+    display: none !important;
   }
 }
