@@ -7,7 +7,9 @@
   --text: #e8e8e8;
   --muted: #484848;
   --subtle: #2a2a2a;
-  --accent: #e8e8e8;
+  --accent: #a973f1;
+  --accent-dark: #4e01b4;
+  --accent-light: #8b5ec7;
   --syne: "Syne", sans-serif;
   --inter: "Inter", sans-serif;
 
@@ -19,6 +21,9 @@
   --font-accent-2: "Inter", sans-serif;
   --color-gray-1: rgba(255, 255, 255, 0.835);
   --color-gray-2: rgba(216, 216, 216, 0.845);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-light: var(--accent-light);
   --breakpoint-desktop: 1380px;
 }
 
@@ -49,7 +54,7 @@ body::after {
   inset: 0;
   background-image: radial-gradient(
     600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.09) 0%,
+    rgba(169, 115, 241, 0.15) 0%,
     transparent 100%
   );
   pointer-events: none;

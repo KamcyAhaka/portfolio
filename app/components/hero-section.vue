@@ -39,9 +39,9 @@ const philosophy = ref(["Understand", "Design", "Experience"]);
 .heading-text {
   .text-highlight {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.835);
+    -webkit-text-stroke: 1px color-mix(in srgb, var(--accent-light), white 40%);
     -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgba(255, 255, 255, 0.835);
+    -webkit-text-stroke-color: color-mix(in srgb, var(--accent-light), white 40%);
   }
 }
 </style>

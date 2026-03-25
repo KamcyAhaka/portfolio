@@ -137,8 +137,8 @@ onMounted(() => {
     margin-bottom: -100px;
     background: radial-gradient(
       ellipse 75% 160% at 50% -20%,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.07) 45%,
+      rgba(169, 115, 241, 0.18) 0%,
+      rgba(169, 115, 241, 0.07) 45%,
       transparent 70%
     );
     opacity: 0;

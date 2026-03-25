@@ -83,7 +83,7 @@ onUnmounted(() => {
   height: 50px;
   margin-top: -25px;
   margin-left: -25px;
-  background-color: var(--accent, #e8e8e8);
+  background-color: #e8e8e8;
   mix-blend-mode: difference;
   border: none;
 }

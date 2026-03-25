@@ -53,7 +53,7 @@ const contactMethods = [
         class="contact-card group flex flex-col gap-5 rounded-2xl border border-white/5 bg-white/[0.02] p-3 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.05]"
       >
         <div
-          class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-xl text-white/50 transition-colors duration-300 group-hover:bg-white/10 group-hover:text-white md:h-12 md:w-12 md:text-2xl"
+          class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-xl text-white/50 transition-colors duration-300 group-hover:bg-(--accent)/20 group-hover:text-(--accent) md:h-12 md:w-12 md:text-2xl"
         >
           <Icon :name="method.icon" />
         </div>
