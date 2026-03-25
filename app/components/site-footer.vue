@@ -2,12 +2,12 @@
 const socialLinks = [
   {
     name: "GitHub",
-    url: "https://github.com/kamcy",
+    url: "https://github.com/KamcyAhaka",
     icon: "i-simple-icons-github",
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/kamcy",
+    url: "https://linkedin.com/in/divine-ahaka",
     icon: "i-simple-icons-linkedin",
   },
   {
