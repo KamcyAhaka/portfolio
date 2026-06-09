@@ -6,7 +6,7 @@ useMouse();
 useHead({
   htmlAttrs: { lang: "en" },
   titleTemplate: (titleChunk) => {
-    return titleChunk ? `${titleChunk} | KamCy.dev` : "KamCy.dev";
+    return titleChunk ? `${titleChunk} | KamCy Ahaka` : "KamCy Ahaka";
   },
   link: [
     // Favicons
@@ -29,16 +29,6 @@ useHead({
       rel: "apple-touch-icon",
       href: "/apple-touch-icon.png",
       sizes: "180x180",
-    },
-    {
-      rel: "manifest",
-      href: "/site.webmanifest",
-    },
-  ],
-  meta: [
-    {
-      name: "apple-mobile-web-app-title",
-      content: "Path Project",
     },
   ],
 });
