@@ -22,6 +22,44 @@ const glowPulsing = ref(false);
 const pillarsRef = ref<HTMLElement | null>(null);
 const pillarRefs = ref<HTMLElement[]>([]);
 
+const { pendingPillar, clearPendingPillar } = usePhilosophyNav();
+
+/** Activate a pillar visually (does not scroll the inner container). */
+const activatePillar = (word: string) => {
+  glowPulsing.value = false;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      activePillar.value = word;
+      glowPulsing.value = true;
+    });
+  });
+};
+
+/** Scroll the pillars container to the element matching `word` and activate it. */
+const jumpToPillar = (word: string) => {
+  const container = pillarsRef.value;
+  if (!container) return;
+
+  const target = pillarRefs.value.find((el) => el.getAttribute("data-word") === word);
+  if (!target) return;
+
+  // offsetTop is relative to offsetParent. Since pillars are direct children
+  // of the scroll container, target.offsetTop is the correct scroll position.
+  container.scrollTo({ top: target.offsetTop, behavior: "smooth" });
+  activatePillar(word);
+};
+
+// Watch for external navigation requests (e.g. from the hero section).
+// Fire both the inner-container scroll and the page scroll simultaneously —
+// the element exists in the DOM even when off-screen, so scrollTo works
+// immediately. By the time the page scroll brings the section into view,
+// the right pillar is already in position. Single smooth motion.
+watch(pendingPillar, (word) => {
+  if (!word) return;
+  jumpToPillar(word);
+  clearPendingPillar();
+});
+
 onMounted(() => {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -193,24 +231,6 @@ onMounted(() => {
 
     .pillar-text {
       color: rgba(216, 216, 216, 0.75);
-    }
-  }
-
-  &:not(.pillar--active):hover {
-    &::before {
-      transform: scaleY(0.4);
-    }
-
-    .pillar-word {
-      color: rgba(255, 255, 255, 0.95);
-    }
-
-    .pillar-index {
-      color: rgba(255, 255, 255, 0.35);
-    }
-
-    .pillar-text {
-      color: rgba(216, 216, 216, 0.6);
     }
   }
 }
