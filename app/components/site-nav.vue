@@ -21,9 +21,9 @@ const closeMenu = () => {
 <template>
   <header class="site-header">
     <nav
-      class="site-nav fixed top-0 z-50 flex h-20 w-screen items-center justify-between px-7 md:px-16 lg:px-24 xl:px-48"
+      class="site-nav fixed top-0 z-50 flex h-20 w-screen items-center justify-between px-5 md:px-16 lg:px-24 xl:px-48"
     >
-      <NuxtLink to="/" class="site-logo z-[60] flex text-lg font-bold md:tracking-wide" @click="closeMenu">
+      <NuxtLink to="/" class="site-logo z-60 flex text-lg font-bold md:tracking-wide" @click="closeMenu">
         <img src="/logo.svg" alt="logo" class="h-6 w-6" />
         <span>amCy</span>
       </NuxtLink>
@@ -49,7 +49,7 @@ const closeMenu = () => {
 
       <!-- Mobile Hamburger Button -->
       <button
-        class="z-[60] flex h-8 w-8 flex-col items-center justify-center gap-1.5 text-white md:hidden"
+        class="z-60 flex h-8 w-8 flex-col items-center justify-center gap-1.5 text-white md:hidden"
         aria-label="Toggle menu"
         @click="toggleMenu"
       >
