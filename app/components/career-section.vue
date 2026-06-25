@@ -11,23 +11,26 @@ const experienceRefs = ref<HTMLElement[]>([]);
 const experiences = [
   {
     company: "Topibro Technologies",
+    url: "https://www.topibrotech.com/",
     role: "Software Engineer",
     index: "01",
     time: "Jan 2025 - Present",
     activities: [
-      "Delivered 10+ client-facing web apps across 5+ industries, owning frontend from architecture to release",
-      "Integrated 40+ REST and third-party APIs, handling auth, error states, and edge cases",
-      "Improved frontend performance by 30% via bundle optimisation, lazy loading, and render efficiency",
-      "Collaborated with 12+ cross-functional stakeholders — designers, engineers, PMs, and clients — per project",
-      "Refactored legacy codebases, cutting frontend technical debt by 40%",
-      "Led technical planning and delivery for projects spanning 4–16 weeks",
+      "Delivered 10+ client-facing web applications across 5+ industries between West and East Africa, owning frontend implementation from architecture to production release",
+      "Integrated frontend systems with 40+ REST and third-party APIs, including contributing to the design of internal endpoints, handling authentication flows, error states, and edge-case scenarios",
+      "Improved application performance by 30% through bundle optimisation, lazy loading, and render efficiency improvements, alongside Firestore query structuring and Cloud Functions cold-start reduction",
+      "Collaborated with 12+ cross-functional stakeholders (designers, backend engineers, PMs, and clients) per project.",
+      "Mentored and supported 6 frontend interns, providing onboarding, code reviews, and weekly technical guidance",
+      "Refactored and stabilised legacy client codebases, reducing frontend technical debt by 40%",
+      "Participated in full-stack technical planning, estimation, and delivery for projects ranging from 4 to 16 weeks, contributing to backend decisions including Firestore data modelling and CI/CD pipeline setup",
     ],
   },
   {
     company: "Seamailer",
+    url: "https://seamailer.app/",
     role: "Frontend Developer",
     index: "02",
-    time: "Aug 2025 - Jan 2025",
+    time: "Aug 2024 - Jan 2025",
     activities: [
       "Built a directed graph visualisation UI for the flagship automation feature, shipping 2 weeks ahead of schedule",
       "Designed a modular component system that cut feature dev time by 35% across 5+ major product areas",
@@ -92,7 +95,7 @@ onMounted(() => {
 
       <div
         ref="experienceRef"
-        class="experiences flex min-h-0 flex-1 flex-col overflow-scroll lg:max-h-[500px] lg:pt-[10vh] lg:pl-10 xl:w-1/2"
+        class="experiences flex min-h-0 flex-1 flex-col overflow-scroll lg:max-h-[500px] lg:pl-10 xl:w-1/2"
         :class="{ 'experiences--lit': glowPulsing }"
       >
         <div
@@ -104,13 +107,19 @@ onMounted(() => {
             }
           "
           :data-company="experience.company"
-          class="experience relative grid gap-4 py-8 md:py-12"
+          class="experience relative grid gap-2 py-8 md:gap-4 md:py-12"
           :class="{ 'experience--active': activeExperience === experience.company }"
         >
           <span class="experience-index pt-1 text-xs md:text-sm">{{ experience.index }}</span>
           <div class="experience-body flex flex-col gap-3">
             <h3 class="experience-role text-xl md:text-2xl">{{ experience.role }}</h3>
-            <h4 class="experience-company text-xs md:text-sm">{{ experience.company }}</h4>
+            <NuxtLink
+              :to="experience.url"
+              external
+              target="_blank"
+              class="experience-company text-xs font-semibold md:text-sm"
+              >{{ experience.company }}</NuxtLink
+            >
             <h4 class="experience-time text-xs md:text-sm">{{ experience.time }}</h4>
             <ul class="experience-activities mt-2 flex flex-col gap-3">
               <li
