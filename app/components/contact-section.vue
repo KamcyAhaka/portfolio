@@ -13,12 +13,6 @@ const contactMethods = [
     href: "https://www.linkedin.com/in/divine-ahaka/",
   },
   {
-    icon: "octicon:device-mobile-16",
-    title: "Mobile",
-    value: "+234 706 461 3220",
-    href: "https://wa.me/2347064613220",
-  },
-  {
     icon: "qlementine-icons:resume-16",
     title: "Resume",
     value: "Download",
@@ -50,7 +44,7 @@ const contactMethods = [
         :href="method.href"
         :target="method.href.startsWith('http') ? '_blank' : undefined"
         :download="method.title === 'Resume' ? 'divine-ahaka-resume.pdf' : undefined"
-        class="contact-card group flex flex-col gap-5 rounded-2xl border border-white/5 bg-white/[0.02] p-3 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.05]"
+        class="contact-card group flex flex-col gap-5 rounded-2xl border border-white/5 bg-white/2 p-3 transition-all duration-300 hover:border-white/15 hover:bg-white/5"
       >
         <div
           class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-xl text-white/50 transition-colors duration-300 group-hover:bg-(--accent)/20 group-hover:text-(--accent) md:h-12 md:w-12 md:text-2xl"
@@ -69,6 +63,10 @@ const contactMethods = [
 </template>
 
 <style scoped lang="scss">
+.contact-card:last-of-type {
+  grid-column: span 2;
+}
+
 .contact-title {
   font-family: var(--font-accent, inherit);
   font-size: clamp(1.75rem, 6vw, 2.5rem);

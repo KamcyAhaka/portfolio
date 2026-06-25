@@ -114,7 +114,7 @@ onMounted(() => {
 
       <div
         ref="pillarsRef"
-        class="pillars flex min-h-0 flex-1 flex-col overflow-scroll lg:pl-10 xl:w-1/2 xl:pt-[10vh]"
+        class="pillars flex min-h-0 flex-1 flex-col overflow-scroll lg:pl-10 xl:w-1/2"
         :class="{ 'pillars--lit': glowPulsing }"
       >
         <div
@@ -126,7 +126,7 @@ onMounted(() => {
             }
           "
           :data-word="pillar.word"
-          class="pillar relative grid gap-4 py-8 md:py-12"
+          class="pillar relative grid gap-2 py-8 md:gap-4 md:py-12"
           :class="{ 'pillar--active': activePillar === pillar.word }"
         >
           <span class="pillar-index pt-1 text-xs md:text-sm">{{ pillar.index }}</span>
