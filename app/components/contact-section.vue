@@ -16,7 +16,7 @@ const contactMethods = [
     icon: "qlementine-icons:resume-16",
     title: "Resume",
     value: "Download",
-    href: "/divine-ahaka-resume.pdf",
+    href: "https://docs.google.com/document/d/1qPRuL4DLGpaBK4QETNotcq-jW0ZdZFqhXR5IbW0fEgA/export?format=pdf",
   },
 ];
 </script>
