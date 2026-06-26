@@ -20,9 +20,9 @@ const socialLinks = [
 
 <template>
   <footer
-    class="site-footer flex flex-col items-center justify-center gap-4 py-7 md:flex-row md:justify-between md:px-16 lg:px-24 xl:px-48"
+    class="site-footer flex flex-col items-center justify-center gap-4 py-7 md:grid md:grid-cols-3 md:justify-between md:px-16 lg:px-24 xl:px-48"
   >
-    <div class="social-media-container flex w-full gap-3">
+    <div class="social-media-container flex w-full justify-center gap-3 md:justify-start">
       <NuxtLink v-for="link in socialLinks" :key="link.name" v-magnetic :to="link.url" target="_blank">
         <div class="social-media-icon">
           <Icon :name="link.icon" />
@@ -32,7 +32,7 @@ const socialLinks = [
     <p class="w-full text-center text-sm text-gray-400">
       &copy; {{ new Date().getFullYear() }} KamCy. All rights reserved.
     </p>
-    <p class="w-full max-w-xs text-center text-sm text-balance text-gray-400 md:text-right">
+    <p class="w-full max-w-xs text-center text-sm text-gray-400 md:ml-auto md:text-right md:text-balance">
       Built with
       <a
         href="https://nuxt.com"

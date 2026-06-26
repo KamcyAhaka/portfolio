@@ -98,8 +98,9 @@ const closeMenu = () => {
 
 <style scoped lang="scss">
 .site-nav {
-  background-color: rgba(10, 10, 10, 0.5);
-  backdrop-filter: blur(10px);
+  background-color: rgba(10, 10, 10, 0.2);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 .fade-enter-active,
