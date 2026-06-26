@@ -20,7 +20,37 @@ const pillars = [
 const activePillar = ref<string | null>(null);
 const glowPulsing = ref(false);
 const pillarsRef = ref<HTMLElement | null>(null);
-const pillarRefs = ref<HTMLElement[]>([]);
+
+const hoveredPillarIndex = ref<number | null>(null);
+const resizeCounter = ref(0);
+
+const handleResize = () => {
+  resizeCounter.value++;
+};
+
+const currentTarget = computed(() => {
+  void resizeCounter.value;
+  if (!pillarsRef.value) return null;
+  const els = Array.from(pillarsRef.value.querySelectorAll(".pillar")) as HTMLElement[];
+
+  if (hoveredPillarIndex.value !== null) {
+    return els[hoveredPillarIndex.value] || null;
+  }
+
+  if (!activePillar.value) return null;
+  return els.find((el) => el.getAttribute("data-word") === activePillar.value) || null;
+});
+
+const indicatorStyle = computed(() => {
+  if (!currentTarget.value) {
+    return { opacity: 0, height: "0px" };
+  }
+  return {
+    transform: `translateY(${currentTarget.value.offsetTop}px)`,
+    height: `${currentTarget.value.offsetHeight}px`,
+    opacity: 1,
+  };
+});
 
 const { pendingPillar, clearPendingPillar } = usePhilosophyNav();
 
@@ -40,7 +70,8 @@ const jumpToPillar = (word: string) => {
   const container = pillarsRef.value;
   if (!container) return;
 
-  const target = pillarRefs.value.find((el) => el.getAttribute("data-word") === word);
+  const elements = Array.from(container.querySelectorAll(".pillar")) as HTMLElement[];
+  const target = elements.find((el) => el.getAttribute("data-word") === word);
   if (!target) return;
 
   // offsetTop is relative to offsetParent. Since pillars are direct children
@@ -61,6 +92,15 @@ watch(pendingPillar, (word) => {
 });
 
 onMounted(() => {
+  window.addEventListener("resize", handleResize);
+  // Force a reactivity trigger on mount to ensure computed properties run
+  resizeCounter.value++;
+
+  const container = pillarsRef.value;
+  if (!container) return;
+
+  const elements = Array.from(container.querySelectorAll(".pillar")) as HTMLElement[];
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -79,15 +119,18 @@ onMounted(() => {
       });
     },
     {
-      root: pillarsRef.value,
+      root: container,
       rootMargin: "0px 0px -80% 0px",
       threshold: 0,
     },
   );
 
-  pillarRefs.value.forEach((el) => observer.observe(el));
+  elements.forEach((el) => observer.observe(el));
 
-  onUnmounted(() => observer.disconnect());
+  onUnmounted(() => {
+    observer.disconnect();
+    window.removeEventListener("resize", handleResize);
+  });
 });
 </script>
 
@@ -117,17 +160,17 @@ onMounted(() => {
         class="pillars flex min-h-0 flex-1 flex-col overflow-scroll lg:pl-10 xl:w-1/2"
         :class="{ 'pillars--lit': glowPulsing }"
       >
+        <!-- Smooth moving indicator for desktop -->
+        <div class="pillar-indicator" :style="indicatorStyle" />
+
         <div
-          v-for="pillar in pillars"
+          v-for="(pillar, index) in pillars"
           :key="pillar.word"
-          :ref="
-            (el) => {
-              if (el) pillarRefs.push(el as HTMLElement);
-            }
-          "
           :data-word="pillar.word"
           class="pillar relative grid gap-2 py-8 md:gap-4 md:py-12"
           :class="{ 'pillar--active': activePillar === pillar.word }"
+          @mouseenter="hoveredPillarIndex = index; activatePillar(pillar.word)"
+          @mouseleave="hoveredPillarIndex = null"
         >
           <span class="pillar-index pt-1 text-xs md:text-sm">{{ pillar.index }}</span>
           <div class="pillar-body flex flex-col gap-3">
@@ -203,24 +246,29 @@ onMounted(() => {
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
 
-  &::before {
-    content: "";
-    position: absolute;
-    left: -1.5rem;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.7);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.35s ease;
+  /* Left border for mobile/tablet only */
+  @media (max-width: 1023px) {
+    &::before {
+      content: "";
+      position: absolute;
+      left: -1.5rem;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.7);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.35s ease;
+    }
+
+    &--active {
+      &::before {
+        transform: scaleY(1);
+      }
+    }
   }
 
   &--active {
-    &::before {
-      transform: scaleY(1);
-    }
-
     .pillar-word {
       color: rgba(255, 255, 255, 1);
     }
@@ -232,6 +280,44 @@ onMounted(() => {
     .pillar-text {
       color: rgba(216, 216, 216, 0.75);
     }
+  }
+
+  /* On desktop, lighten text color on hover */
+  @media (min-width: 1024px) {
+    &:hover {
+      .pillar-word {
+        color: rgba(255, 255, 255, 1);
+      }
+
+      .pillar-index {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .pillar-text {
+        color: rgba(216, 216, 216, 0.75);
+      }
+    }
+  }
+}
+
+.pillar-indicator {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .pillar-indicator {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 1rem; /* Aligns with left border: 2.5rem (pl-10) - 1.5rem (offset) = 1rem */
+    width: 1px;
+    background: rgba(255, 255, 255, 0.7);
+    transition:
+      transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+      height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+      opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 10;
   }
 }
 
