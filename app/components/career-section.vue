@@ -6,7 +6,6 @@ const years = currentYear - startYear;
 const activeExperience = ref<string | null>(null);
 const glowPulsing = ref(false);
 const experienceRef = ref<HTMLElement | null>(null);
-const experienceRefs = ref<HTMLElement[]>([]);
 
 const experiences = [
   {
@@ -26,10 +25,25 @@ const experiences = [
     ],
   },
   {
+    company: "The PATH Project",
+    url: "https://payattentiontohim.org/",
+    role: "Web Development Team Lead",
+    index: "02",
+    time: "2025 - Present",
+    activities: [
+      "Led technical architecture decisions for a full-stack nonprofit platform built on Nuxt 4, Firebase, and Supabase (PostgreSQL), establishing frontend standards, branching conventions, and code review processes across a volunteer engineering team",
+      "Architected and implemented a role-based access control (RBAC) system with real-time privilege enforcement, securing sensitive admin functions across a multi-role admin panel",
+      "Designed and delivered a scalable content pipeline with automated publishing via GitHub Actions, a TinyMCE-powered CMS, and a PostHog analytics dashboard with shareable URL state for cross-team visibility",
+      "Hardened platform security by implementing Upstash Redis rate limiting on authentication endpoints and webhook-based attachment validation on inbound email flows via Resend",
+      "Drove technical planning and sprint delivery across volunteer contributors, coordinating engineering, design, and content workstreams to ship features on schedule",
+      "Defined and enforced frontend architecture patterns, component conventions, and deployment workflows adopted across the team",
+    ],
+  },
+  {
     company: "Seamailer",
     url: "https://seamailer.app/",
     role: "Frontend Developer",
-    index: "02",
+    index: "03",
     time: "Aug 2024 - Jan 2025",
     activities: [
       "Built a directed graph visualisation UI for the flagship automation feature, shipping 2 weeks ahead of schedule",
@@ -44,34 +58,44 @@ const experiences = [
   },
 ];
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const company = entry.target.getAttribute("data-company");
-          if (company === activeExperience.value) return;
+const handleScroll = () => {
+  const container = experienceRef.value;
+  if (!container) return;
 
-          glowPulsing.value = false;
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              activeExperience.value = company;
-              glowPulsing.value = true;
-            });
-          });
-        }
+  const elements = Array.from(container.querySelectorAll(".experience")) as HTMLElement[];
+  const scrollTop = container.scrollTop;
+  let activeCompany = activeExperience.value;
+  let minDistance = Infinity;
+
+  elements.forEach((el) => {
+    const distance = Math.abs(el.offsetTop - scrollTop);
+    if (distance < minDistance) {
+      minDistance = distance;
+      activeCompany = el.getAttribute("data-company");
+    }
+  });
+
+  if (activeCompany && activeCompany !== activeExperience.value) {
+    glowPulsing.value = false;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        activeExperience.value = activeCompany;
+        glowPulsing.value = true;
       });
-    },
-    {
-      root: experienceRef.value,
-      rootMargin: "0px 0px -80% 0px",
-      threshold: 0,
-    },
-  );
+    });
+  }
+};
 
-  experienceRefs.value.forEach((el) => observer.observe(el));
+onMounted(() => {
+  const container = experienceRef.value;
+  if (!container) return;
 
-  onUnmounted(() => observer.disconnect());
+  container.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+
+  onUnmounted(() => {
+    container.removeEventListener("scroll", handleScroll);
+  });
 });
 </script>
 
@@ -101,11 +125,6 @@ onMounted(() => {
         <div
           v-for="experience in experiences"
           :key="experience.company"
-          :ref="
-            (el) => {
-              if (el) experienceRefs.push(el as HTMLElement);
-            }
-          "
           :data-company="experience.company"
           class="experience relative grid gap-2 py-8 md:gap-4 md:py-12"
           :class="{ 'experience--active': activeExperience === experience.company }"
