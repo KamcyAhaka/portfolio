@@ -11,8 +11,9 @@ const glowPulsing = ref(false);
 const hasDragged = ref(false);
 
 const projects: Project[] = [
+  /* Temporarily hidden while GCP account issues are resolved
   {
-    index: "01", // adjust to your ordering
+    index: "01",
     title: "Logrithm",
     tagline: "AI-powered GitHub activity analyzer and developer scoring platform",
     tags: ["Next.js", "TypeScript", "Firebase", "GCP", "Gemini AI"],
@@ -38,8 +39,9 @@ const projects: Project[] = [
       "Adopted an AGPL-3.0 open core licensing model, structuring the codebase to expose the core analyzer publicly while keeping Pro features proprietary, balancing community contribution with commercial sustainability",
     ],
   },
+  */
   {
-    index: "02", // adjust to whatever index it falls on
+    index: "01",
     title: "The PATH Project",
     tagline: "Youth advocacy platform for young males across Africa",
     tags: ["Nuxt", "Vue", "TypeScript", "Firebase", "Supabase"],
@@ -62,7 +64,7 @@ const projects: Project[] = [
     ],
   },
   {
-    index: "03",
+    index: "02",
     title: "Ugochukwu Osuagwu",
     tagline: "Personal portfolio for a UI/UX designer",
     tags: ["Nuxt", "Vue", "TypeScript", "SCSS"],
@@ -83,7 +85,7 @@ const projects: Project[] = [
     ],
   },
   {
-    index: "04",
+    index: "03",
     title: "Judith Amarachi",
     tagline: "Personal portfolio for a tech sales expert",
     tags: ["Nuxt", "Vue", "Tailwind"],
@@ -103,7 +105,7 @@ const projects: Project[] = [
   },
 
   {
-    index: "05",
+    index: "04",
     title: "Judith Amarachi Blog",
     tagline: "Full-stack blog platform with role-based access control and automation",
     tags: ["Nuxt", "Firebase", "Appwrite", "TinyMCE"],
